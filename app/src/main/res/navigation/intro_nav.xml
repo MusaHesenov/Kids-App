@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/intro_nav"
+    app:startDestination="@id/createProfileFragment">
+    <fragment
+        android:id="@+id/createProfileFragment"
+        android:name="com.example.kidsapp.fragments.CreateProfileFragment"
+        android:label="CreateProfileFragment"
+        tools:layout="@layout/fragment_create_profile">
+        <action
+            android:id="@+id/action_createProfileFragment_to_fillProfileFragment"
+            app:destination="@id/fillProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fillProfileFragment"
+        android:name="com.example.kidsapp.fragments.FillProfileFragment"
+        android:label="FillProfileFragment"
+        tools:layout="@layout/fragment_fill_profile">
+        <action
+            android:id="@+id/action_fillProfileFragment_to_accountSuccessFragment"
+            app:destination="@id/accountSuccessFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountSuccessFragment"
+        android:name="com.example.kidsapp.fragments.AccountSuccessFragment"
+        android:label="AccountSuccessFragment"
+        tools:layout="@layout/fragment_account_success"/>
+</navigation>
