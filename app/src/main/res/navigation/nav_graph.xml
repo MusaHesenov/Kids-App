@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/intro_Fragment">
+
+    <fragment
+        android:id="@+id/intro_Fragment"
+        android:name="com.example.kidsapp.IntroFragment"
+        android:label="fragment_intro_"
+        tools:layout="@layout/fragment_intro_" />
+</navigation>
