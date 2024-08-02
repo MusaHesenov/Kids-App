@@ -15,5 +15,6 @@
     <color name="blue">#0080FF</color>
     <color name="dark_blue">#32357A</color>
     <color name="light_blue">#0054DF</color>
-
+    <color name="primary">#FF6200EE</color>"
+    <color name="selector_color">#000000</color>
 </resources>
