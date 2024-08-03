@@ -17,4 +17,7 @@
     <color name="light_blue">#0054DF</color>
     <color name="primary">#FF6200EE</color>"
     <color name="selector_color">#000000</color>
+    <color name="g_card_background">#FAFDFF</color>
+    <color name="green">#FF00FF00</color>
+    <color name="red">#FF0000</color>
 </resources>
