@@ -60,6 +60,9 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Thirty part libraries
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
+
 
     // Room
     val roomVersion = "2.6.1"
