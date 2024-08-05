@@ -62,7 +62,7 @@ dependencies {
 
     // Thirty part libraries
     implementation ("de.hdodenhof:circleimageview:3.1.0")
-
+    implementation("com.tbuonomo:dotsindicator:5.0")
 
     // Room
     val roomVersion = "2.6.1"

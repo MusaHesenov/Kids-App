@@ -26,4 +26,6 @@ class ActivityAdapter(val activityList: List<Activity>): RecyclerView.Adapter<Ac
         holder.binding.categoryName.text = activityList[position].title
         holder.binding.layout.setBackgroundResource(activityList[position].background)
     }
+
+    var onClick: ((Activity) -> Unit)? = null
 }

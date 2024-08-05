@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.kidsapp.data.Category
 import com.example.kidsapp.databinding.CategoryRvItemBinding
 
-class CatregoryAdapter(val categoryList: List<Category>): RecyclerView.Adapter<CatregoryAdapter.CategoryViewHolder>() {
+class CategoriesAdapter(val categoryList: List<Category>): RecyclerView.Adapter<CategoriesAdapter.CategoryViewHolder>() {
 
     class CategoryViewHolder(val binding: CategoryRvItemBinding): RecyclerView.ViewHolder(binding.root) {
 

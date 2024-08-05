@@ -21,8 +21,6 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <!-- Avatar Grid -->
-
-    <!-- Continue Button -->
     <GridLayout
         android:id="@+id/avatar_grid"
         android:layout_width="match_parent"
@@ -43,6 +41,8 @@
             android:layout_height="70dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
 
@@ -53,6 +53,8 @@
             android:layout_column="1"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
 
@@ -61,6 +63,8 @@
             android:layout_height="70dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
 
@@ -69,6 +73,8 @@
             android:layout_height="70dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
 
@@ -77,6 +83,8 @@
             android:layout_height="70dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
 
@@ -85,6 +93,8 @@
             android:layout_height="70dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
 
@@ -93,6 +103,8 @@
             android:layout_height="70dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
 
@@ -101,10 +113,13 @@
             android:layout_height="70dp"
             android:layout_columnWeight="1"
             android:layout_margin="8dp"
+            android:padding="4dp"
+            android:background="@drawable/image_selector"
             android:src="@drawable/img"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
     </GridLayout>
 
+    <!-- Continue Button -->
     <Button
         android:id="@+id/continue_button"
         android:layout_width="match_parent"

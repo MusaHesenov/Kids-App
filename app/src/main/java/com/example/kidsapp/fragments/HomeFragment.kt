@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.ActivityAdapter
@@ -61,6 +62,10 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             this.adapter = activityAdapter
             addItemDecoration(HorizontalItemDecoration())
+        }
+
+        binding.viewAllCategory.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
 
 
