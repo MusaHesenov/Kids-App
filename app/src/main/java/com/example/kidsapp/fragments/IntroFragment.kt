@@ -33,7 +33,7 @@ class IntroFragment : Fragment(R.layout.fragment_intro_) {
         val introImage1 = binding.imageIntro.startAnimation(ttb)
 
         binding.registerBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_introFragment_to_createProfileFragment)
+            findNavController().navigate(R.id.action_introFragment_to_loginFragment)
         }
 
     }

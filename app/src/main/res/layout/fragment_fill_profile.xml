@@ -8,6 +8,27 @@
     android:padding="24dp"
     tools:context=".activities.MainActivity">
 
+    <TextView
+        android:id="@+id/select_age_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Age"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAge"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_age_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"/>
+
     <!-- Title -->
     <TextView
         android:id="@+id/select_avatar_title"
@@ -16,9 +37,9 @@
         android:text="Select Avatar"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"
+        android:layout_marginVertical="24dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/rvAge"/>
 
     <!-- Avatar Grid -->
     <GridLayout
@@ -43,8 +64,7 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="0dp"
@@ -55,8 +75,7 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="0dp"
@@ -65,8 +84,7 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="0dp"
@@ -75,8 +93,7 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="0dp"
@@ -85,8 +102,7 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="0dp"
@@ -95,8 +111,7 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="0dp"
@@ -105,8 +120,7 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:layout_width="0dp"
@@ -115,20 +129,19 @@
             android:layout_margin="8dp"
             android:padding="4dp"
             android:background="@drawable/image_selector"
-            android:src="@drawable/img"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.Circular" />
+            android:src="@drawable/img" />
     </GridLayout>
 
     <!-- Continue Button -->
-    <Button
-        android:id="@+id/continue_button"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Continue"
-        android:backgroundTint="@color/primary"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="24dp"
+    <com.github.leandroborgesferreira.loadingbutton.customViews.CircularProgressButton
+        android:id="@+id/buttonSave"
+        style="@style/blueButtonStyle"
+        android:layout_width="0dp"
+        android:layout_height="55dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatar_grid"/>
+        app:layout_constraintTop_toBottomOf="@id/avatar_grid"
+        android:text="Save"
+        android:layout_marginTop="25dp"
+        app:spinning_bar_color="@color/white"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

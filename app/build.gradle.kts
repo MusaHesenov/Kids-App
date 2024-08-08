@@ -5,6 +5,9 @@ plugins {
     id ("kotlin-parcelize")
     id("com.google.devtools.ksp")
     id ("androidx.navigation.safeargs")
+    id ("dagger.hilt.android.plugin")
+    id ("com.google.dagger.hilt.android")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -56,6 +59,9 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -63,6 +69,8 @@ dependencies {
     // Thirty part libraries
     implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation("com.tbuonomo:dotsindicator:5.0")
+    implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
+    implementation("com.github.bumptech.glide:glide:4.13.0")
 
     // Room
     val roomVersion = "2.6.1"
@@ -89,5 +97,9 @@ dependencies {
 
     // Annotation processor
     ksp("androidx.lifecycle:lifecycle-compiler:$lifecycleVersion")
+
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.47")
+    kapt("com.google.dagger:hilt-compiler:2.47")
 
 }
