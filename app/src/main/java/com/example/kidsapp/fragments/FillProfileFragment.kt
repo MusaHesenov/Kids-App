@@ -1,5 +1,7 @@
 package com.example.kidsapp.fragments
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.AgeAdapter
 import com.example.kidsapp.data.User
@@ -45,6 +48,16 @@ class FillProfileFragment : Fragment(R.layout.fragment_fill_profile) {
 
 
         ageList = listOf("3", "4", "5", "6", "7", "8", "9", "10")
+        val avatarUris = listOf(
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1")
+        )
 
         val ageAdapter = AgeAdapter(ageList)
 
@@ -62,12 +75,15 @@ class FillProfileFragment : Fragment(R.layout.fragment_fill_profile) {
 
         for (i in 0 until avatarGrid.childCount) {
             val imageView = avatarGrid.getChildAt(i) as ShapeableImageView
+            imageView.setImageURI(avatarUris[i])
+            imageView.tag = avatarUris[i]  // Assign the corresponding URI as the tag
             imageView.setOnClickListener {
                 selectedImageView?.isSelected = false
                 imageView.isSelected = true
                 selectedImageView = imageView
             }
         }
+
 
         lifecycleScope.launchWhenStarted {
             viewModel.updateInfo.collectLatest {
@@ -89,13 +105,15 @@ class FillProfileFragment : Fragment(R.layout.fragment_fill_profile) {
         }
 
         binding.buttonSave.setOnClickListener {
-            binding.apply {
-                val firstName = "Elvin"
-                val lastName = "Seyfullayev"
-                val email = "eseyfullayev@gmail.com"
-                val user = User(firstName, lastName, email)
-                viewModel.updateUser(user, imageUri, selectedAge)
+            val selectedUri = selectedImageView?.tag as? Uri
+            if (selectedUri != null) {
+                viewModel.updateUser(selectedUri, selectedAge)
+            } else {
+                Toast.makeText(requireContext(), "Please select an avatar.", Toast.LENGTH_SHORT).show()
             }
         }
+
+
     }
+
 }

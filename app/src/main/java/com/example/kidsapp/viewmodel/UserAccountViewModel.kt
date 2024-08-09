@@ -36,6 +36,8 @@ class UserAccountViewModel @Inject constructor(
     private val _updateInfo = MutableStateFlow<Resource<User>>(Resource.Unspecified())
     val updateInfo = _updateInfo.asStateFlow()
 
+    var currentUser = User()
+
     init {
         getUser()
     }
@@ -51,6 +53,7 @@ class UserAccountViewModel @Inject constructor(
                 user?.let {
                     viewModelScope.launch {
                         _user.emit(Resource.Success(it))
+                        currentUser = it
                     }
                 }
             }.addOnFailureListener {
@@ -61,8 +64,8 @@ class UserAccountViewModel @Inject constructor(
 
     }
 
-    fun updateUser(user: User, imgUri: Uri?, age: String?){
-        val areInputsValid = validateEmail(user.email) is RegisterValidation.Success
+    fun updateUser(imgUri: Uri?, age: String?){
+        val areInputsValid = validateEmail(currentUser.email) is RegisterValidation.Success
 
         if(!areInputsValid){
             viewModelScope.launch {
@@ -74,9 +77,9 @@ class UserAccountViewModel @Inject constructor(
             _updateInfo.emit(Resource.Loading())
         }
         if(imgUri == null){
-            saveUserInformation(user, true, age)
+            saveUserInformation(currentUser, true, age)
         }else{
-            saveUserInformationWithNewImage(user, imgUri, age)
+            saveUserInformationWithNewImage(currentUser, imgUri, age)
         }
     }
 
