@@ -25,5 +25,6 @@
     <color name="g_gray700">#757575</color>
     <color name="g_blue">#000DAE</color>
     <color name="g_white">#F5F8FA</color>
+    <color name="lblue">#daf5ff</color>
 
 </resources>

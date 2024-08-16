@@ -122,6 +122,10 @@ class AccountViewModel @Inject constructor(
         if (FirebaseAuth.getInstance().currentUser?.uid != null)
             return true
         return false
-
     }
+
+    fun signOut(){
+        firebaseAuth.signOut()
+    }
+
 }

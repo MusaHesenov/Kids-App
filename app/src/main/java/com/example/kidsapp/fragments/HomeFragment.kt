@@ -1,10 +1,15 @@
 package com.example.kidsapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
@@ -15,11 +20,22 @@ import com.example.kidsapp.data.Category
 import com.example.kidsapp.databinding.ActivityHomeBinding
 import com.example.kidsapp.databinding.FragmentHomeBinding
 import com.example.kidsapp.utils.HorizontalItemDecoration
+import com.example.kidsapp.utils.Resource
+import com.example.kidsapp.viewmodel.CategoryViewModel
+import com.example.kidsapp.viewmodel.UserAccountViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+private val TAG = "HomeFragment"
+
+@AndroidEntryPoint
 class HomeFragment: Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var categoryList: ArrayList<Category>
     private lateinit var activityList: ArrayList<Activity>
+    private val categoryAdapter by lazy { CatregoryAdapter() }
+    private val viewModel: UserAccountViewModel by activityViewModels()
+    private val categoryViewModel by viewModels<CategoryViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,31 +48,19 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        categoryList = ArrayList()
-        activityList = ArrayList()
 
-        val animal = Category("Animals", R.drawable.img, R.drawable.category_background)
-        val fruits = Category("Fruits", R.drawable.img, R.drawable.category_background_green)
-        val vegetables = Category("Vegetables", R.drawable.img, R.drawable.category_background_blue)
+        setupCategoryRv()
+        activityList = ArrayList()
 
         val story = Activity("Stories", R.drawable.img, R.drawable.category_background_red)
         val quiz = Activity("Quiz", R.drawable.img, R.drawable.category_background_purple)
 
-        categoryList.add(animal)
-        categoryList.add(fruits)
-        categoryList.add(vegetables)
-
         activityList.add(story)
         activityList.add(quiz)
 
-        val adapter = CatregoryAdapter(categoryList)
         val activityAdapter = ActivityAdapter(activityList)
 
-        binding.rvCategory.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            this.adapter = adapter
-            addItemDecoration(HorizontalItemDecoration())
-        }
+
 
         binding.rvActivity.apply {
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -68,6 +72,64 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
         }
 
+        lifecycleScope.launchWhenStarted {
+            viewModel.user.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                    }
+                    is Resource.Success -> {
+                        binding.tvName.text = it.data?.firstName
+                    }
+                    is Resource.Error -> {
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Unit
+                }
 
+            }
+            viewModel.getUser()
+        }
+
+        lifecycleScope.launchWhenStarted {
+            categoryViewModel.categoryListLimit.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        categoryAdapter.differ.submitList(it.data)
+                        hideLoading()
+                    }
+                    is Resource.Error -> {
+                        hideLoading()
+                        Log.e(TAG, it.message.toString())
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Unit
+                }
+            }
+        }
+
+
+    }
+
+    private fun hideLoading() {
+        binding.categoryProgressBar.visibility = View.GONE
+        binding.bannerProgressBar.visibility = View.GONE
+        binding.activityProgressBar.visibility = View.GONE
+    }
+
+    private fun showLoading() {
+        binding.categoryProgressBar.visibility = View.VISIBLE
+        binding.bannerProgressBar.visibility = View.VISIBLE
+        binding.activityProgressBar.visibility = View.VISIBLE
+    }
+
+    private fun setupCategoryRv() {
+        binding.rvCategory.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = categoryAdapter
+            addItemDecoration(HorizontalItemDecoration())
+        }
     }
 }

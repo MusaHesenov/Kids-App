@@ -10,14 +10,10 @@
         android:label="FillProfileFragment"
         tools:layout="@layout/fragment_fill_profile">
         <action
-            android:id="@+id/action_fillProfileFragment_to_accountSuccessFragment"
-            app:destination="@id/accountSuccessFragment" />
+            android:id="@+id/action_fillProfileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/accountSuccessFragment"
-        android:name="com.example.kidsapp.fragments.AccountSuccessFragment"
-        android:label="AccountSuccessFragment"
-        tools:layout="@layout/fragment_account_success"/>
+
     <fragment
         android:id="@+id/introFragment"
         android:name="com.example.kidsapp.fragments.IntroFragment"
@@ -37,9 +33,6 @@
         <action
             android:id="@+id/action_loginFragment_to_fragmentRegister"
             app:destination="@id/fragmentRegister" />
-        <action
-            android:id="@+id/action_loginFragment_to_fillProfileFragment"
-            app:destination="@id/fillProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentRegister"
@@ -49,5 +42,8 @@
         <action
             android:id="@+id/action_fragmentRegister_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_fragmentRegister_to_fillProfileFragment"
+            app:destination="@id/fillProfileFragment" />
     </fragment>
 </navigation>

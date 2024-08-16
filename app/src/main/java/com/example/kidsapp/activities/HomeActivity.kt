@@ -1,23 +1,33 @@
 package com.example.kidsapp.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.kidsapp.R
 import com.example.kidsapp.databinding.ActivityHomeBinding
+import com.example.kidsapp.viewmodel.AccountViewModel
+import com.example.kidsapp.viewmodel.UserAccountViewModel
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
     private lateinit var binding: ActivityHomeBinding
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +59,11 @@ class HomeActivity : AppCompatActivity() {
                     // Handle notifications action
                 }
                 R.id.nav_logout -> {
-                    // Handle logout action
+                    auth.signOut()
+                    Intent(this, MainActivity::class.java).also { intent ->
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                    }
                 }
             }
             drawerLayout.closeDrawers()

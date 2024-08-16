@@ -1,23 +1,35 @@
 package com.example.kidsapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kidsapp.R
-import com.example.kidsapp.adapters.CategoriesAdapter
+import com.example.kidsapp.adapters.CatregoryAdapter
 import com.example.kidsapp.data.Activity
 import com.example.kidsapp.data.Category
 import com.example.kidsapp.databinding.FragmentCategoryBinding
 import com.example.kidsapp.utils.HorizontalItemDecoration
+import com.example.kidsapp.utils.Resource
 import com.example.kidsapp.utils.VerticalItemDecoration
+import com.example.kidsapp.viewmodel.CategoryViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
+private val TAG = "CategoryFragment"
+
+@AndroidEntryPoint
 class CategoryFragment: Fragment(R.layout.fragment_category) {
     private lateinit var binding: FragmentCategoryBinding
-    private lateinit var categoryList: ArrayList<Category>
+    private val categoryViewModel by viewModels<CategoryViewModel>()
+    private val categoryAdapter by lazy { CatregoryAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,40 +47,44 @@ class CategoryFragment: Fragment(R.layout.fragment_category) {
             findNavController().navigateUp()
         }
 
-        categoryList = ArrayList()
+        setupCategoryRv()
 
-        val animal = Category("Animals", R.drawable.img, R.drawable.category_background)
-        val fruits = Category("Fruits", R.drawable.img, R.drawable.category_background_green)
-        val vegetables = Category("Vegetables", R.drawable.img, R.drawable.category_background_blue)
-        val story = Category("Stories", R.drawable.img, R.drawable.category_background_red)
-        val quiz = Category("Quiz", R.drawable.img, R.drawable.category_background_purple)
-        val animal1 = Category("Animals", R.drawable.img, R.drawable.category_background)
-        val fruits2 = Category("Fruits", R.drawable.img, R.drawable.category_background_green)
-        val vegetables1 = Category("Vegetables", R.drawable.img, R.drawable.category_background_blue)
-        val story1 = Category("Stories", R.drawable.img, R.drawable.category_background_red)
-        val quiz1 = Category("Quiz", R.drawable.img, R.drawable.category_background_purple)
+        lifecycleScope.launchWhenStarted {
+            categoryViewModel.categoryList.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        categoryAdapter.differ.submitList(it.data)
+                        hideLoading()
+                    }
+                    is Resource.Error -> {
+                        hideLoading()
+                        Log.e(TAG, it.message.toString())
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Unit
+                }
+            }
+        }
 
+    }
 
-        categoryList.add(animal)
-        categoryList.add(fruits)
-        categoryList.add(vegetables)
-        categoryList.add(story)
-        categoryList.add(quiz)
-        categoryList.add(animal1)
-        categoryList.add(fruits2)
-        categoryList.add(vegetables1)
-        categoryList.add(story1)
-        categoryList.add(quiz1)
+    private fun hideLoading() {
+        binding.categoryProgressBar.visibility = View.GONE
+    }
 
-        val adapter = CategoriesAdapter(categoryList)
+    private fun showLoading() {
+        binding.categoryProgressBar.visibility = View.VISIBLE
+    }
 
+    private fun setupCategoryRv() {
         binding.rvCategories.apply {
             layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
-            this.adapter = adapter
+            adapter = categoryAdapter
             addItemDecoration(HorizontalItemDecoration())
             addItemDecoration(VerticalItemDecoration())
         }
-
-
     }
 }

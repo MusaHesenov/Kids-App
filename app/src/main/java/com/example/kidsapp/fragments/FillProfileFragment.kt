@@ -50,13 +50,13 @@ class FillProfileFragment : Fragment(R.layout.fragment_fill_profile) {
         ageList = listOf("3", "4", "5", "6", "7", "8", "9", "10")
         val avatarUris = listOf(
             Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
-            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
-            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
-            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
-            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
-            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
-            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1"),
-            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar1")
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar2"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar3"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar4"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar5"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar6"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar4"),
+            Uri.parse("android.resource://com.example.kidsapp/drawable/avatar3")
         )
 
         val ageAdapter = AgeAdapter(ageList)
@@ -93,7 +93,7 @@ class FillProfileFragment : Fragment(R.layout.fragment_fill_profile) {
                     }
                     is Resource.Success -> {
                         binding.buttonSave.revertAnimation()
-                        findNavController().navigate(R.id.action_fillProfileFragment_to_accountSuccessFragment)
+                        findNavController().navigate(R.id.action_fillProfileFragment_to_loginFragment)
                     }
                     is Resource.Error -> {
                         binding.buttonSave.revertAnimation()

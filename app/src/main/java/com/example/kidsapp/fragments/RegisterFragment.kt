@@ -66,7 +66,7 @@ class RegisterFragment: Fragment(R.layout.fragment_register) {
                 when(it){
                     is Resource.Success -> {
                         binding.buttonRegister.startAnimation()
-                        binding.buttonRegister.findNavController().navigate(R.id.action_fragmentRegister_to_loginFragment)
+                        binding.buttonRegister.findNavController().navigate(R.id.action_fragmentRegister_to_fillProfileFragment)
                     }
 
                     is Resource.Loading -> {
