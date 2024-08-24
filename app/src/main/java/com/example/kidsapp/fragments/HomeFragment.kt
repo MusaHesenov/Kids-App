@@ -14,10 +14,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.ActivityAdapter
-import com.example.kidsapp.adapters.CatregoryAdapter
+import com.example.kidsapp.adapters.CategoryAdapter
 import com.example.kidsapp.data.Activity
 import com.example.kidsapp.data.Category
-import com.example.kidsapp.databinding.ActivityHomeBinding
 import com.example.kidsapp.databinding.FragmentHomeBinding
 import com.example.kidsapp.utils.HorizontalItemDecoration
 import com.example.kidsapp.utils.Resource
@@ -33,7 +32,8 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var categoryList: ArrayList<Category>
     private lateinit var activityList: ArrayList<Activity>
-    private val categoryAdapter by lazy { CatregoryAdapter() }
+    private val categoryAdapter by lazy { CategoryAdapter() }
+    private val activityAdapter by lazy { ActivityAdapter() }
     private val viewModel: UserAccountViewModel by activityViewModels()
     private val categoryViewModel by viewModels<CategoryViewModel>()
 
@@ -50,23 +50,8 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         setupCategoryRv()
-        activityList = ArrayList()
+        setupActivityRv()
 
-        val story = Activity("Stories", R.drawable.img, R.drawable.category_background_red)
-        val quiz = Activity("Quiz", R.drawable.img, R.drawable.category_background_purple)
-
-        activityList.add(story)
-        activityList.add(quiz)
-
-        val activityAdapter = ActivityAdapter(activityList)
-
-
-
-        binding.rvActivity.apply {
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            this.adapter = activityAdapter
-            addItemDecoration(HorizontalItemDecoration())
-        }
 
         binding.viewAllCategory.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
@@ -110,7 +95,35 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
             }
         }
 
+        lifecycleScope.launchWhenStarted {
+            categoryViewModel.activityList.collectLatest {
+                when (it) {
+                    is Resource.Loading -> {
+                        showLoading()
+                    }
+                    is Resource.Success -> {
+                        activityAdapter.differ.submitList(it.data)
+                        hideLoading()
+                    }
+                    is Resource.Error -> {
+                        hideLoading()
+                        Log.e(TAG, it.message.toString())
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Unit
+                }
+            }
+        }
 
+
+    }
+
+    private fun setupActivityRv() {
+        binding.rvActivity.apply {
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            adapter = activityAdapter
+            addItemDecoration(HorizontalItemDecoration())
+        }
     }
 
     private fun hideLoading() {

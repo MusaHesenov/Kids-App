@@ -1,6 +1,7 @@
 package com.example.kidsapp.viewmodel
 
 import androidx.lifecycle.ViewModel
+import com.example.kidsapp.data.Activity
 import com.example.kidsapp.data.Category
 import com.example.kidsapp.utils.Resource
 import com.google.firebase.auth.FirebaseAuth
@@ -17,12 +18,16 @@ class CategoryViewModel @Inject constructor(
     private val _categoryList = MutableStateFlow<Resource<List<Category>>>(Resource.Unspecified());
     val categoryList = _categoryList.asStateFlow()
 
+    private val _activityList = MutableStateFlow<Resource<List<Activity>>>(Resource.Unspecified());
+    val activityList = _activityList.asStateFlow()
+
     private val _categoryListLimit = MutableStateFlow<Resource<List<Category>>>(Resource.Unspecified());
     val categoryListLimit = _categoryListLimit.asStateFlow()
 
     init {
         fetchCategoryList()
         fetchCategoryListLimit()
+        fetchActivityList()
     }
 
     private fun fetchCategoryListLimit() {
@@ -44,6 +49,17 @@ class CategoryViewModel @Inject constructor(
             }
             .addOnFailureListener {
                 _categoryList.value = Resource.Error(it.message.toString())
+            }
+    }
+
+    fun fetchActivityList(){
+        firestore.collection("activity").get()
+            .addOnSuccessListener {
+                val activityList = it.toObjects(Activity::class.java)
+                _activityList.value = Resource.Success(activityList)
+            }
+            .addOnFailureListener {
+                _activityList.value = Resource.Error(it.message.toString())
             }
     }
 }

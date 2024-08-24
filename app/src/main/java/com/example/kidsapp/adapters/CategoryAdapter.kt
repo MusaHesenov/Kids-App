@@ -1,7 +1,6 @@
 package com.example.kidsapp.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -10,7 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.kidsapp.data.Category
 import com.example.kidsapp.databinding.CategoryRvItemBinding
 
-class CatregoryAdapter: RecyclerView.Adapter<CatregoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter: RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
     inner class CategoryViewHolder(val binding: CategoryRvItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {

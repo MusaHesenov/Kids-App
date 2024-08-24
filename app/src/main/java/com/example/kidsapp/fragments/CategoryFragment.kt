@@ -12,9 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kidsapp.R
-import com.example.kidsapp.adapters.CatregoryAdapter
-import com.example.kidsapp.data.Activity
-import com.example.kidsapp.data.Category
+import com.example.kidsapp.adapters.CategoryAdapter
 import com.example.kidsapp.databinding.FragmentCategoryBinding
 import com.example.kidsapp.utils.HorizontalItemDecoration
 import com.example.kidsapp.utils.Resource
@@ -29,7 +27,7 @@ private val TAG = "CategoryFragment"
 class CategoryFragment: Fragment(R.layout.fragment_category) {
     private lateinit var binding: FragmentCategoryBinding
     private val categoryViewModel by viewModels<CategoryViewModel>()
-    private val categoryAdapter by lazy { CatregoryAdapter() }
+    private val categoryAdapter by lazy { CategoryAdapter() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
