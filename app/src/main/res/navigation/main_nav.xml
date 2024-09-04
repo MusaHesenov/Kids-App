@@ -17,5 +17,15 @@
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.kidsapp.fragments.CategoryFragment"
-        android:label="CategoryFragment" />
+        android:label="CategoryFragment" >
+        <action
+            android:id="@+id/action_categoryFragment_to_numberFragment"
+            app:destination="@id/numberFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/numberFragment"
+        android:name="com.example.kidsapp.fragments.NumberFragment"
+        android:label="NumberFragment" >
+
+    </fragment>
 </navigation>

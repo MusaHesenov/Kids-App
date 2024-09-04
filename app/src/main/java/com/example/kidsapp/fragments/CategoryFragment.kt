@@ -38,11 +38,19 @@ class CategoryFragment: Fragment(R.layout.fragment_category) {
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.categoryBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        categoryAdapter.onClick = { category ->
+            when (category.categoryName) {
+                "Numbers" -> findNavController().navigate(R.id.action_categoryFragment_to_numberFragment)
+
+            }
         }
 
         setupCategoryRv()
