@@ -1,8 +1,7 @@
 package com.example.kidsapp.data
 
 class AnimalCategory(
-    var title: String,
-    var image: String,
+    var name: String,
 ) {
-    constructor():  this("","")
+    constructor():  this("")
 }

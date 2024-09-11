@@ -6,25 +6,25 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kidsapp.data.Animal
+import com.example.kidsapp.data.AnimalCategory
 import com.example.kidsapp.databinding.AnimalCategoryRvBinding
 
 class AnimalsCategoryAdapter: RecyclerView.Adapter<AnimalsCategoryAdapter.AnimalsCatergoryViewHolder>() {
     inner class AnimalsCatergoryViewHolder(val binding : AnimalCategoryRvBinding):RecyclerView.ViewHolder(binding.root) {
-        fun bin5(animalCategory: Animal) {
+        fun bind(animalCategory: AnimalCategory) {
             binding.apply {
-                titleCategory.text = animalCategory?.title
-
+                titleCategory.text = animalCategory.name
             }
         }
     }
 
-    private val differCallBack = object : DiffUtil.ItemCallback<Animal>() {
-        override fun areItemsTheSame(oldItem: Animal, newItem: Animal): Boolean {
-            return oldItem.title == newItem.title
+    private val differCallBack = object : DiffUtil.ItemCallback<AnimalCategory>() {
+        override fun areItemsTheSame(oldItem: AnimalCategory, newItem: AnimalCategory): Boolean {
+            return oldItem.name == newItem.name
         }
 
-        override fun areContentsTheSame(oldItem: Animal, newItem: Animal): Boolean {
-            return oldItem.title == newItem.title
+        override fun areContentsTheSame(oldItem: AnimalCategory, newItem: AnimalCategory): Boolean {
+            return oldItem.name == newItem.name
         }
     }
 
@@ -40,6 +40,6 @@ class AnimalsCategoryAdapter: RecyclerView.Adapter<AnimalsCategoryAdapter.Animal
 
     override fun onBindViewHolder(holder: AnimalsCatergoryViewHolder, position: Int) {
         val animalCategory = differ.currentList[position]
-        holder.bin5(animalCategory)
+        holder.bind(animalCategory)
     }
 }

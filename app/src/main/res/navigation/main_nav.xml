@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_categoryFragment_to_numberFragment"
             app:destination="@id/numberFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_animalCategoryFragment"
+            app:destination="@id/animalCategoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/numberFragment"
@@ -28,4 +31,8 @@
         android:label="NumberFragment" >
 
     </fragment>
+    <fragment
+        android:id="@+id/animalCategoryFragment"
+        android:name="com.example.kidsapp.fragments.AnimalCategoryFragment"
+        android:label="AnimalCategoryFragment" />
 </navigation>
