@@ -49,7 +49,12 @@ class CategoryFragment: Fragment(R.layout.fragment_category) {
         categoryAdapter.onClick = { category ->
             when (category.categoryName) {
                 "Numbers" -> findNavController().navigate(R.id.action_categoryFragment_to_numberFragment)
+            }
+        }
 
+        categoryAdapter.onClick = {category ->
+            when(category.categoryName) {
+                "animals" -> findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)
             }
         }
 
