@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kidsapp.data.Animal
 import com.example.kidsapp.data.AnimalCategory
+import com.example.kidsapp.data.Category
 import com.example.kidsapp.databinding.AnimalCategoryRvBinding
 
 class AnimalsCategoryAdapter: RecyclerView.Adapter<AnimalsCategoryAdapter.AnimalsCatergoryViewHolder>() {
@@ -41,5 +42,11 @@ class AnimalsCategoryAdapter: RecyclerView.Adapter<AnimalsCategoryAdapter.Animal
     override fun onBindViewHolder(holder: AnimalsCatergoryViewHolder, position: Int) {
         val animalCategory = differ.currentList[position]
         holder.bind(animalCategory)
+
+        holder.itemView.setOnClickListener {
+            onClick?.invoke(animalCategory)
+        }
+
     }
+    var onClick: ((AnimalCategory) -> Unit)? = null
 }
