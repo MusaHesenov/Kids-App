@@ -34,5 +34,27 @@
     <fragment
         android:id="@+id/animalCategoryFragment"
         android:name="com.example.kidsapp.fragments.AnimalCategoryFragment"
-        android:label="AnimalCategoryFragment" />
+        android:label="AnimalCategoryFragment" >
+        <action
+            android:id="@+id/action_animalCategoryFragment_to_carnivorousFragment"
+            app:destination="@id/carnivorousFragment" />
+        <action
+            android:id="@+id/action_animalCategoryFragment_to_herbivorousFragment"
+            app:destination="@id/herbivorousFragment" />
+        <action
+            android:id="@+id/action_animalCategoryFragment_to_omnivorousFragment"
+            app:destination="@id/omnivorousFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carnivorousFragment"
+        android:name="com.example.kidsapp.fragments.CarnivorousFragment"
+        android:label="CarnivorousFragment" />
+    <fragment
+        android:id="@+id/herbivorousFragment"
+        android:name="com.example.kidsapp.fragments.HerbivorousFragment"
+        android:label="HerbivorousFragment" />
+    <fragment
+        android:id="@+id/omnivorousFragment"
+        android:name="com.example.kidsapp.fragments.OmnivorousFragment"
+        android:label="OmnivorousFragment" />
 </navigation>

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.AnimalsCategoryAdapter
@@ -23,7 +24,7 @@ private val TAG = "AnimalCategoryFragment"
 @AndroidEntryPoint
 class AnimalCategoryFragment : Fragment() {
    private lateinit var binding: FragmentAnimalCategoryBinding
-   private val animalAdapter by lazy{AnimalsCategoryAdapter()}
+   private val animalCategoryAdapter by lazy{AnimalsCategoryAdapter()}
     private val animalViewModel by viewModels<AnimalViewModel>()
 
     override fun onCreateView(
@@ -38,11 +39,24 @@ class AnimalCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupRv()
+
+        binding.animalCategoryBack.setOnClickListener {
+            findNavController().navigateUp()
+        }
+
+        animalCategoryAdapter.onClick = {animalCategory ->
+            when(animalCategory.name) {
+                "Carnivorous" -> findNavController().navigate(R.id.action_animalCategoryFragment_to_carnivorousFragment)
+                "Herbivorous" -> findNavController().navigate(R.id.action_animalCategoryFragment_to_herbivorousFragment)
+                "Omnivorous" -> findNavController().navigate(R.id.action_animalCategoryFragment_to_omnivorousFragment)
+            }
+        }
+
     }
 
     private fun setupRv() {
         binding.animalCategoryRv.apply {
-            adapter = animalAdapter
+            adapter = animalCategoryAdapter
             layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
 
@@ -53,7 +67,7 @@ class AnimalCategoryFragment : Fragment() {
                         //binding.animalCategoryProgressBar.visibility = View.VISIBLE
                     }
                     is Resource.Success -> {
-                        animalAdapter.differ.submitList(it.data)
+                        animalCategoryAdapter.differ.submitList(it.data)
                         //binding.animalCategoryProgressBar.visibility = View.GONE
                     }
                     is Resource.Error -> {
