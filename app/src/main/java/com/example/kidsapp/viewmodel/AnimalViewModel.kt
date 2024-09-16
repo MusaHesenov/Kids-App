@@ -27,10 +27,13 @@ class AnimalViewModel @Inject constructor(
         fetchAnimalCategoryList()
     }
 
-    private fun fetchAnimalList(animalType: String) {
+     fun fetchAnimalList(animalType: String) {
         firestore.collection("category").document("animals").collection("animals").document(animalType).collection(animalType).get()
             .addOnSuccessListener {
                 val animalList = it.toObjects(Animal::class.java)
+                animalList.forEach { animal ->
+                    Log.d("vmodel", "Animal: ${animal.name}, ${animal.description}, ${animal.image}")
+                }
                 viewModelScope.launch {
                     _animalList.emit(Resource.Success(animalList))
                 }

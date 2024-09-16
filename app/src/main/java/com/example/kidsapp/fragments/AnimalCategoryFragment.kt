@@ -46,18 +46,19 @@ class AnimalCategoryFragment : Fragment() {
 
         animalCategoryAdapter.onClick = {animalCategory ->
             when(animalCategory.name) {
-                "Carnivorous" -> findNavController().navigate(R.id.action_animalCategoryFragment_to_carnivorousFragment)
-                "Herbivorous" -> findNavController().navigate(R.id.action_animalCategoryFragment_to_herbivorousFragment)
-                "Omnivorous" -> findNavController().navigate(R.id.action_animalCategoryFragment_to_omnivorousFragment)
+                "Carnivorous" -> {
+                    animalViewModel.fetchAnimalList("carnivorous");
+                    findNavController().navigate(R.id.action_animalCategoryFragment_to_carnivorousFragment)
+                }
+                "Herbivorous" -> {
+                    animalViewModel.fetchAnimalList("herbivorous");
+                    findNavController().navigate(R.id.action_animalCategoryFragment_to_herbivorousFragment)
+                }
+                "Omnivorous" -> {
+                    animalViewModel.fetchAnimalList("omnivorous");
+                    findNavController().navigate(R.id.action_animalCategoryFragment_to_omnivorousFragment)
+                }
             }
-        }
-
-    }
-
-    private fun setupRv() {
-        binding.animalCategoryRv.apply {
-            adapter = animalCategoryAdapter
-            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
 
         lifecycleScope.launchWhenStarted {
@@ -78,6 +79,14 @@ class AnimalCategoryFragment : Fragment() {
                     else -> Unit
                 }
             }
+        }
+
+    }
+
+    private fun setupRv() {
+        binding.animalCategoryRv.apply {
+            adapter = animalCategoryAdapter
+            layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
     }
 

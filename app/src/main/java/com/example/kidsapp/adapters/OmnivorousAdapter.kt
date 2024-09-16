@@ -13,7 +13,7 @@ class OmnivorousAdapter: RecyclerView.Adapter<OmnivorousAdapter.OmnivorousViewHo
     inner class OmnivorousViewHolder(val binding: AnimalRvItemBinding):RecyclerView.ViewHolder(binding.root) {
         fun bin4(animal: Animal?) {
             binding.apply {
-                titleTv.text = animal?.title
+                titleTv.text = animal?.name
                 descriptionTv.text = animal?.description
                 Glide.with(itemView).load(animal?.image).into(image)
             }
@@ -22,11 +22,11 @@ class OmnivorousAdapter: RecyclerView.Adapter<OmnivorousAdapter.OmnivorousViewHo
 
     private val differCallBack = object : DiffUtil.ItemCallback<Animal>() {
         override fun areItemsTheSame(oldItem: Animal, newItem: Animal): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Animal, newItem: Animal): Boolean {
-            return oldItem.title == newItem.title
+            return oldItem.name == newItem.name
         }
     }
 

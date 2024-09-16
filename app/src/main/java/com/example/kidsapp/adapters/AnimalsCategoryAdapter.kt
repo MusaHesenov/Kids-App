@@ -5,13 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.kidsapp.data.Animal
 import com.example.kidsapp.data.AnimalCategory
-import com.example.kidsapp.data.Category
 import com.example.kidsapp.databinding.AnimalCategoryRvBinding
 
-class AnimalsCategoryAdapter: RecyclerView.Adapter<AnimalsCategoryAdapter.AnimalsCatergoryViewHolder>() {
-    inner class AnimalsCatergoryViewHolder(val binding : AnimalCategoryRvBinding):RecyclerView.ViewHolder(binding.root) {
+class AnimalsCategoryAdapter: RecyclerView.Adapter<AnimalsCategoryAdapter.AnimalsCategoryViewHolder>() {
+    inner class AnimalsCategoryViewHolder(val binding : AnimalCategoryRvBinding):RecyclerView.ViewHolder(binding.root) {
         fun bind(animalCategory: AnimalCategory) {
             binding.apply {
                 titleCategory.text = animalCategory.name
@@ -31,15 +29,15 @@ class AnimalsCategoryAdapter: RecyclerView.Adapter<AnimalsCategoryAdapter.Animal
 
     val differ = AsyncListDiffer(this, differCallBack)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalsCatergoryViewHolder {
-        return AnimalsCatergoryViewHolder(AnimalCategoryRvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalsCategoryViewHolder {
+        return AnimalsCategoryViewHolder(AnimalCategoryRvBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
 
-    override fun onBindViewHolder(holder: AnimalsCatergoryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: AnimalsCategoryViewHolder, position: Int) {
         val animalCategory = differ.currentList[position]
         holder.bind(animalCategory)
 
