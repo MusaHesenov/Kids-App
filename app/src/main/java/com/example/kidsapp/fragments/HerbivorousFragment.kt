@@ -1,19 +1,28 @@
 package com.example.kidsapp.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.HerbivorousAdapter
 import com.example.kidsapp.databinding.FragmentHerbivorousBinding
+import com.example.kidsapp.utils.Resource
+import com.example.kidsapp.viewmodel.AnimalViewModel
+import kotlinx.coroutines.flow.collectLatest
 
 class HerbivorousFragment : Fragment(R.layout.fragment_herbivorous) {
   private lateinit var binding : FragmentHerbivorousBinding
   private val herbivorousAdapter by lazy { HerbivorousAdapter() }
+    private val animalViewModel: AnimalViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +40,31 @@ class HerbivorousFragment : Fragment(R.layout.fragment_herbivorous) {
 
         binding.herbivorousBack.setOnClickListener {
             findNavController().navigateUp()
+        }
+
+        lifecycleScope.launchWhenResumed {
+            animalViewModel.animalList.collectLatest {
+                Log.d("TAG", "Resource state: $it")
+                when (it) {
+                    is Resource.Loading -> {
+                        //binding.animalProgressBar.visibility = View.VISIBLE
+                    }
+                    is Resource.Success -> {
+                        if (it.data.isNullOrEmpty()) {
+                            Log.d("TAG", "List is empty")
+                        } else {
+                            Log.d("TAG", "Submitting list: ${it.data}")
+                            herbivorousAdapter.differ.submitList(it.data)
+                        }
+                        //binding.animalProgressBar.visibility = View.GONE
+                    }
+                    is Resource.Error -> {
+                        //binding.animalProgressBar.visibility = View.GONE
+                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> Unit
+                }
+            }
         }
     }
 

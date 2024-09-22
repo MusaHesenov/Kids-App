@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,7 +26,8 @@ private val TAG = "AnimalCategoryFragment"
 class AnimalCategoryFragment : Fragment() {
    private lateinit var binding: FragmentAnimalCategoryBinding
    private val animalCategoryAdapter by lazy{AnimalsCategoryAdapter()}
-    private val animalViewModel by viewModels<AnimalViewModel>()
+    private val animalViewModel: AnimalViewModel by activityViewModels()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,

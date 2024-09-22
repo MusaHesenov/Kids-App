@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -22,7 +23,7 @@ import kotlinx.coroutines.flow.collectLatest
 class CarnivorousFragment : Fragment(R.layout.fragment_carnivorous) {
     private lateinit var binding: FragmentCarnivorousBinding
     private val carnivorousAdapter by lazy { CarnivorousAdapter() }
-    private val animalViewModel by viewModels<AnimalViewModel>()
+    private val animalViewModel: AnimalViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,8 +43,9 @@ class CarnivorousFragment : Fragment(R.layout.fragment_carnivorous) {
             findNavController().navigateUp()
         }
 
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenResumed {
             animalViewModel.animalList.collectLatest {
+                Log.d("TAG", "Resource state: $it")
                 when (it) {
                     is Resource.Loading -> {
                         //binding.animalProgressBar.visibility = View.VISIBLE
