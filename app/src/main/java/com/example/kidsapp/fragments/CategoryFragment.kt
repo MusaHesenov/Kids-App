@@ -50,6 +50,11 @@ class CategoryFragment: Fragment(R.layout.fragment_category) {
             when (category.categoryName) {
                 "Numbers" -> findNavController().navigate(R.id.action_categoryFragment_to_numberFragment)
                 "Animals" -> findNavController().navigate(R.id.action_categoryFragment_to_animalCategoryFragment)
+                "Alphabet"-> findNavController().navigate(R.id.action_categoryFragment_to_alphabetFragment)
+                "Shapes"->findNavController().navigate(R.id.action_categoryFragment_to_shapesFragment)
+                "Fruits"->findNavController().navigate(R.id.action_categoryFragment_to_fruitsFragment)
+                "Flags"->findNavController().navigate(R.id.action_categoryFragment_to_flagsFragment)
+                "Colors"->findNavController().navigate(R.id.action_categoryFragment_to_colorsFragment)
             }
         }
 

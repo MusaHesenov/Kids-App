@@ -24,6 +24,21 @@
         <action
             android:id="@+id/action_categoryFragment_to_animalCategoryFragment"
             app:destination="@id/animalCategoryFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_alphabetFragment"
+            app:destination="@id/alphabetFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_shapesFragment"
+            app:destination="@id/shapesFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_fruitsFragment"
+            app:destination="@id/fruitsFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_flagsFragment"
+            app:destination="@id/flagsFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_colorsFragment"
+            app:destination="@id/colorsFragment" />
     </fragment>
     <fragment
         android:id="@+id/numberFragment"
@@ -64,4 +79,24 @@
         android:id="@+id/animalFragment"
         android:name="com.example.kidsapp.fragments.AnimalFragment"
         android:label="AnimalFragment" />
+    <fragment
+        android:id="@+id/alphabetFragment"
+        android:name="com.example.kidsapp.fragments.AlphabetFragment"
+        android:label="AlphabetFragment" />
+    <fragment
+        android:id="@+id/fruitsFragment"
+        android:name="com.example.kidsapp.fragments.FruitsFragment"
+        android:label="FruitsFragment" />
+    <fragment
+        android:id="@+id/shapesFragment"
+        android:name="com.example.kidsapp.fragments.ShapesFragment"
+        android:label="ShapesFragment" />
+    <fragment
+        android:id="@+id/flagsFragment"
+        android:name="com.example.kidsapp.fragments.FlagsFragment"
+        android:label="FlagsFragment" />
+    <fragment
+        android:id="@+id/colorsFragment"
+        android:name="com.example.kidsapp.fragments.ColorsFragment"
+        android:label="ColorsFragment" />
 </navigation>
