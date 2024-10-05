@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.kidsapp.data.Colors
-import com.example.kidsapp.data.Fruits
 import com.example.kidsapp.databinding.ColorsRvBinding
 
 class ColorsAdapter : RecyclerView.Adapter<ColorsAdapter.ColorsViewHolder>(){
@@ -16,7 +15,7 @@ class ColorsAdapter : RecyclerView.Adapter<ColorsAdapter.ColorsViewHolder>(){
     inner class ColorsViewHolder(val binding: ColorsRvBinding):RecyclerView.ViewHolder(binding.root) {
         fun bin(colors: Colors?){
             binding.apply {
-                colorsName.text = colors?.colorsName
+                colorsName.text = colors?.name
                 Glide.with(itemView).load(colors?.image).into(colorsImage)
             }
         }
@@ -24,11 +23,11 @@ class ColorsAdapter : RecyclerView.Adapter<ColorsAdapter.ColorsViewHolder>(){
 
     private val differCallBack = object : DiffUtil.ItemCallback<Colors>() {
         override fun areItemsTheSame(oldItem: Colors, newItem: Colors): Boolean {
-            return oldItem.colorsName == newItem.colorsName
+            return oldItem.name == newItem.name
         }
 
         override fun areContentsTheSame(oldItem: Colors, newItem: Colors): Boolean {
-            return oldItem.colorsName == newItem.colorsName
+            return oldItem.name == newItem.name
         }
     }
 
