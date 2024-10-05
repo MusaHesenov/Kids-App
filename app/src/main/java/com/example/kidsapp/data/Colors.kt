@@ -1,7 +1,7 @@
 package com.example.kidsapp.data
 
 class Colors (
-    val colorsName: String,
+    val name: String,
     val image: String
 ){
     constructor(): this("","")
