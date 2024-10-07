@@ -1,0 +1,51 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/category_background_blue"
+    android:padding="16dp"
+    android:gravity="center_vertical">
+
+    <!-- Enstrüman Resmi (Sol Taraf) -->
+    <ImageView
+        android:id="@+id/instrumentImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/avatar2" /> <!-- Burada gitar resmi kullanılabilir -->
+
+    <!-- Metin ve Ses İkonu (Sağ Taraf) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_margin="20dp"
+        >
+
+        <!-- Enstrüman İsmi -->
+        <TextView
+            android:id="@+id/instrumentName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guitar"
+            android:textColor="@android:color/black"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp" />
+
+    </LinearLayout>
+
+    <!-- Ses İkonu (Sağda) -->
+    <ImageView
+        android:id="@+id/soundButton"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/sound"
+        android:onClick="soundClick"/> <!-- Ses simgesi ikonu -->
+
+</LinearLayout>
