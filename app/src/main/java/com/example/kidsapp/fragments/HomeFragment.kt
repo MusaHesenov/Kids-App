@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -13,6 +15,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
+import com.example.kidsapp.activities.HomeActivity
+import com.example.kidsapp.activities.MainActivity
 import com.example.kidsapp.adapters.ActivityAdapter
 import com.example.kidsapp.adapters.CategoryAdapter
 import com.example.kidsapp.data.Activity
@@ -22,6 +26,7 @@ import com.example.kidsapp.utils.HorizontalItemDecoration
 import com.example.kidsapp.utils.Resource
 import com.example.kidsapp.viewmodel.CategoryViewModel
 import com.example.kidsapp.viewmodel.UserAccountViewModel
+import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
@@ -30,12 +35,11 @@ private val TAG = "HomeFragment"
 @AndroidEntryPoint
 class HomeFragment: Fragment(R.layout.fragment_home) {
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var categoryList: ArrayList<Category>
-    private lateinit var activityList: ArrayList<Activity>
     private val categoryAdapter by lazy { CategoryAdapter() }
     private val activityAdapter by lazy { ActivityAdapter() }
     private val viewModel: UserAccountViewModel by activityViewModels()
     private val categoryViewModel by viewModels<CategoryViewModel>()
+    private lateinit var drawerLayout: DrawerLayout
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,9 +53,15 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        drawerLayout = (activity as HomeActivity).findViewById(R.id.drawer_layout)
+
         setupCategoryRv()
         setupActivityRv()
 
+        // Set click listener for the menu icon to open the drawer
+        binding.menu.setOnClickListener {
+            drawerLayout.openDrawer(GravityCompat.START) // Open the drawer from the fragment
+        }
 
         binding.viewAllCategory.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_categoryFragment)

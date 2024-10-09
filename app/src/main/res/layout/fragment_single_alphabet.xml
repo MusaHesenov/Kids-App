@@ -13,19 +13,8 @@
         android:layout_height="wrap_content"
         android:text="A"
         android:textColor="@color/primary"
-        android:textSize="64sp"
+        android:textSize="52sp"
         android:layout_gravity="center" />
-
-
-    <TextView
-        android:id="@+id/tv_alphabet_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="A = first letter"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        android:layout_gravity="center"
-        android:layout_marginTop="8dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_alphabet"

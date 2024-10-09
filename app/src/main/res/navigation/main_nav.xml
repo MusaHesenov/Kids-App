@@ -59,9 +59,6 @@
         <action
             android:id="@+id/action_animalCategoryFragment_to_omnivorousFragment"
             app:destination="@id/omnivorousFragment" />
-        <action
-            android:id="@+id/action_animalCategoryFragment_to_animalFragment"
-            app:destination="@id/animalFragment" />
     </fragment>
     <fragment
         android:id="@+id/carnivorousFragment"
@@ -75,10 +72,6 @@
         android:id="@+id/omnivorousFragment"
         android:name="com.example.kidsapp.fragments.OmnivorousFragment"
         android:label="OmnivorousFragment" />
-    <fragment
-        android:id="@+id/animalFragment"
-        android:name="com.example.kidsapp.fragments.AnimalFragment"
-        android:label="AnimalFragment" />
     <fragment
         android:id="@+id/alphabetFragment"
         android:name="com.example.kidsapp.fragments.AlphabetFragment"
