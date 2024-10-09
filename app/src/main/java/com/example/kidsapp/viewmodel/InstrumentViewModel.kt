@@ -25,7 +25,7 @@ class InstrumentViewModel @Inject constructor(
     }
 
     private fun fetchInstrumentsList() {
-        firestore.collection("category").document("intruments").collection("instruments").get()
+        firestore.collection("category").document("instruments").collection("instruments").get()
             .addOnSuccessListener {
                 val instrumentsList = it.toObjects(Instruments::class.java)
                 _instrumentsList.value = Resource.Success(instrumentsList)
