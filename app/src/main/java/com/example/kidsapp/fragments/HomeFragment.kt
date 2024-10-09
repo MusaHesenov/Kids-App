@@ -58,6 +58,14 @@ class HomeFragment: Fragment(R.layout.fragment_home) {
         setupCategoryRv()
         setupActivityRv()
 
+        categoryAdapter.onClick = { category ->
+            when (category.categoryName) {
+                "Animals" -> findNavController().navigate(R.id.action_homeFragment_to_animalCategoryFragment)
+                "Alphabet"-> findNavController().navigate(R.id.action_homeFragment_to_alphabetFragment)
+                "Colors"->findNavController().navigate(R.id.action_homeFragment_to_colorsFragment)
+            }
+        }
+
         // Set click listener for the menu icon to open the drawer
         binding.menu.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START) // Open the drawer from the fragment
