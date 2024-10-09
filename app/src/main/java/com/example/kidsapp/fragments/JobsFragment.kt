@@ -9,12 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.ColorsAdapter
 import com.example.kidsapp.adapters.JobsAdapter
 import com.example.kidsapp.databinding.FragmentJobsBinding
+import com.example.kidsapp.utils.HorizontalItemDecoration
 import com.example.kidsapp.utils.Resource
+import com.example.kidsapp.utils.VerticalItemDecoration
 import com.example.kidsapp.viewmodel.ColorsViewModel
 import com.example.kidsapp.viewmodel.JobsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -71,8 +74,9 @@ class JobsFragment : Fragment() {
     private fun setUpColorsAdapter() {
         binding.jobsRv.apply {
             adapter = jobsAdapter
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false
-            )
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            addItemDecoration(HorizontalItemDecoration())
+            addItemDecoration(VerticalItemDecoration())
         }
     }
 

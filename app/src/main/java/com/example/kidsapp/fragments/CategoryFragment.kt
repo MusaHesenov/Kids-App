@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.navigateUp
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.CategoryAdapter
@@ -55,6 +56,7 @@ class CategoryFragment: Fragment(R.layout.fragment_category) {
                 "Fruits"->findNavController().navigate(R.id.action_categoryFragment_to_fruitsFragment)
                 "Flags"->findNavController().navigate(R.id.action_categoryFragment_to_flagsFragment)
                 "Colors"->findNavController().navigate(R.id.action_categoryFragment_to_colorsFragment)
+                "Music Instruments"->findNavController().navigate(R.id.action_categoryFragment_to_instrumentsFragment)
             }
         }
 

@@ -9,12 +9,15 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.kidsapp.R
 import com.example.kidsapp.adapters.FlagsAdapter
 import com.example.kidsapp.databinding.FragmentFlagsBinding
 import com.example.kidsapp.databinding.FragmentShapesBinding
+import com.example.kidsapp.utils.HorizontalItemDecoration
 import com.example.kidsapp.utils.Resource
+import com.example.kidsapp.utils.VerticalItemDecoration
 import com.example.kidsapp.viewmodel.FlagsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -67,7 +70,9 @@ class FlagsFragment : Fragment() {
     private fun setUpFlagsAdapter() {
         binding.flagsRv.apply {
             adapter = flagsAdapter
-            layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+            layoutManager = GridLayoutManager(requireContext(), 2, GridLayoutManager.VERTICAL, false)
+            addItemDecoration(HorizontalItemDecoration())
+            addItemDecoration(VerticalItemDecoration())
         }
     }
 

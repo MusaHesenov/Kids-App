@@ -39,6 +39,9 @@
         <action
             android:id="@+id/action_categoryFragment_to_colorsFragment"
             app:destination="@id/colorsFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_instrumentsFragment"
+            app:destination="@id/instrumentsFragment" />
     </fragment>
     <fragment
         android:id="@+id/numberFragment"
@@ -92,4 +95,8 @@
         android:id="@+id/colorsFragment"
         android:name="com.example.kidsapp.fragments.ColorsFragment"
         android:label="ColorsFragment" />
+    <fragment
+        android:id="@+id/instrumentsFragment"
+        android:name="com.example.kidsapp.fragments.InstrumentsFragment"
+        android:label="InstrumentsFragment" />
 </navigation>
